@@ -82,6 +82,9 @@
             </slot>
             <slot name="table-row-after" :row="row" :index="index"></slot>
           </tr>
+
+          <slot name="table-tr-after" :row="row" :index="index"></slot>
+
           <tr v-if="processedRows.length === 0">
             <td :colspan="columns.length">
               <slot name="emptystate">
