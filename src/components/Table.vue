@@ -8,6 +8,7 @@
       </div>
       <table ref="table" :class="styleClass">
         <thead>
+          
           <tr v-if="tableActions" class="actions" :colspan="columns.length">
             <slot name="table-actions"></slot>
           </tr>
