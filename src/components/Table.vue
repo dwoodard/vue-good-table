@@ -78,6 +78,7 @@
         </thead>
 
         <tbody>
+
           <template v-for="(row, index) in paginated">
 
             <tr :class="getRowStyleClass(row)" @click="click(row, index)">
@@ -92,14 +93,11 @@
               <slot name="table-row-after" :row="row" :index="index"></slot>
             </tr>
 
-          
-            <tr v-if="childrow && childrowToggle">
+            <tr v-if="childrow">
               <td class="childrow" :colspan="columns.length">
                   <slot name="childrow" :row="row" :index="index"></slot>
               </td>
             </tr>
-          
-
 
           </template>
 
@@ -197,6 +195,9 @@ import {format, parse, compareAsc} from 'date-fns/esm'
     }),
 
     methods: {
+      toggleChild(index){
+        console.log("toggleChild", index)
+      },
 
       nextPage() {
         if(this.currentPerPage == -1) return;
@@ -235,7 +236,7 @@ import {format, parse, compareAsc} from 'date-fns/esm'
       click(row, index) {
         if (this.onClick){
           this.onClick(row, index);
-          this.currentRowIndex = index;
+          this.toggleChild(index)
         }
 
       },
