@@ -81,7 +81,7 @@
 
           <template v-for="(row, index) in paginated">
 
-            <tr :class="getRowStyleClass(row)" @click="click(row, index)">
+            <tr :class="getRowStyleClass(row)" @click="click(row, index)" @toggleChild="toggleChild(row, index)">
               <th v-if="lineNumbers" class="line-numbers">{{ getCurrentIndex(index) }}</th>
               <slot name="table-row-before" :row="row" :index="index"></slot>
               <slot name="table-row" :row="row" :formattedRow="formattedRow(row)" :index="index">
@@ -93,7 +93,7 @@
               <slot name="table-row-after" :row="row" :index="index"></slot>
             </tr>
 
-            <tr v-if="childrow">
+            <tr v-if="childrow && currentRowIndex == index">
               <td class="childrow" :colspan="columns.length">
                   <slot name="childrow" :row="row" :index="index"></slot>
               </td>
@@ -154,6 +154,7 @@ import {format, parse, compareAsc} from 'date-fns/esm'
       columns: {},
       rows: {},
       onClick: {},
+      onToggleChild: {},
       perPage: {},
       sortable: {default: true},
       paginate: {default: false},
@@ -197,6 +198,7 @@ import {format, parse, compareAsc} from 'date-fns/esm'
     methods: {
       toggleChild(index){
         console.log("toggleChild", index)
+        this.currentRowIndex=index;
       },
 
       nextPage() {
@@ -236,9 +238,14 @@ import {format, parse, compareAsc} from 'date-fns/esm'
       click(row, index) {
         if (this.onClick){
           this.onClick(row, index);
-          this.toggleChild(index)
         }
 
+      },
+
+      toggleChild(row, index){
+        if (this.onClick){
+          this.toggleChild(index)
+        }
       },
 
       searchTable() {
