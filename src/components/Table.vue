@@ -18,7 +18,9 @@
               </div>
             </td>
           </tr>
-          <tr v-if="tableActions"></tr>
+          <tr v-if="tableActions" class="actions">
+              <slot name="tableActions"></slot>
+          </tr>
           <tr>
             <th v-if="lineNumbers" class="line-numbers"></th>
             <th v-for="(column, index) in columns"
