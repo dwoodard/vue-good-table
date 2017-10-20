@@ -18,7 +18,7 @@
               </div>
             </td>
           </tr>
-          <tr v-if="tableActions" class="actions">
+          <tr v-if="tableActions" class="actions" :colspan="columns.length">
               <slot name="tableActions"></slot>
           </tr>
           <tr>
