@@ -81,7 +81,7 @@
 
           <template v-for="(row, index) in paginated">
 
-            <tr :class="getRowStyleClass(row)" @click="click(row, index)" @toggleChild="toggleChild(row, index)">
+            <tr :class="getRowStyleClass(row)" @click="click(row, index)">
               <th v-if="lineNumbers" class="line-numbers">{{ getCurrentIndex(index) }}</th>
               <slot name="table-row-before" :row="row" :index="index"></slot>
               <slot name="table-row" :row="row" :formattedRow="formattedRow(row)" :index="index">
@@ -154,7 +154,6 @@ import {format, parse, compareAsc} from 'date-fns/esm'
       columns: {},
       rows: {},
       onClick: {},
-      onToggleChild: {},
       perPage: {},
       sortable: {default: true},
       paginate: {default: false},
@@ -236,16 +235,16 @@ import {format, parse, compareAsc} from 'date-fns/esm'
       },
 
       click(row, index) {
+
         if (this.onClick){
           this.onClick(row, index);
         }
 
-      },
-
-      toggleChild(row, index){
-        if (this.onClick){
+        if (this.childrow){
           this.toggleChild(index)
         }
+
+
       },
 
       searchTable() {
