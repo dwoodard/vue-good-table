@@ -86,9 +86,11 @@
             </tr>
 
           <template v-if="childrow">
-            <div class="childrow">
-                <slot :name="'childrow-'+getCurrentIndex(index)"></slot>
-            </div>
+            <tr>
+              <div class="childrow">
+                  <slot></slot>
+              </div>
+            </tr>
           </template>
 
 
