@@ -18,6 +18,7 @@
               </div>
             </td>
           </tr>
+          <tr v-if="tableActions"></tr>
           <tr>
             <th v-if="lineNumbers" class="line-numbers"></th>
             <th v-for="(column, index) in columns"
@@ -161,6 +162,7 @@ import {format, parse, compareAsc} from 'date-fns/esm'
 
       // search
       globalSearch: {default: false},
+      tableActions: {default: false},
       searchTrigger: {default: null},
       externalSearchQuery: {default: null},
 
@@ -174,7 +176,7 @@ import {format, parse, compareAsc} from 'date-fns/esm'
     },
 
     data: () => ({
-      currentRowIndex: 0,
+      currentRowIndex: null,
       currentPage: 1,
       currentPerPage: 10,
       sortColumn: -1,
@@ -402,7 +404,7 @@ import {format, parse, compareAsc} from 'date-fns/esm'
 
       //get column's defined placeholder or default one
       getPlaceholder(column) {
-        const placeholder = column.placeholder || 'Filter ' + column.label
+        const placeholder = column.placeholder || '' + column.label //Filter
         return placeholder
       },
 
