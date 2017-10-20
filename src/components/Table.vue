@@ -174,6 +174,7 @@ import {format, parse, compareAsc} from 'date-fns/esm'
     },
 
     data: () => ({
+      currentRowIndex: 0,
       currentPage: 1,
       currentPerPage: 10,
       sortColumn: -1,
@@ -223,8 +224,11 @@ import {format, parse, compareAsc} from 'date-fns/esm'
       },
 
       click(row, index) {
-        if (this.onClick)
+        if (this.onClick){
           this.onClick(row, index);
+          this.currentRowIndex = index;
+        }
+
       },
 
       searchTable() {
@@ -447,7 +451,6 @@ import {format, parse, compareAsc} from 'date-fns/esm'
     },
 
     computed: {
-
       searchTerm(){
         return (this.externalSearchQuery != null) ? this.externalSearchQuery : this.globalSearchTerm;
       },
