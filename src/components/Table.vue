@@ -8,6 +8,10 @@
       </div>
       <table ref="table" :class="styleClass">
         <thead>
+          <tr v-if="tableActions" class="actions" :colspan="columns.length">
+            <slot name="table-actions"></slot>
+          </tr>
+
           <tr v-if="globalSearch && externalSearchQuery == null">
             <td :colspan="lineNumbers ? columns.length + 1: columns.length">
               <div class="global-search">
@@ -18,9 +22,7 @@
               </div>
             </td>
           </tr>
-          <tr v-if="tableActions" class="actions" :colspan="columns.length">
-              <slot name="tableActions"></slot>
-          </tr>
+
           <tr>
             <th v-if="lineNumbers" class="line-numbers"></th>
             <th v-for="(column, index) in columns"
@@ -34,6 +36,7 @@
             </th>
             <slot name="thead-tr"></slot>
           </tr>
+
           <tr v-if="hasFilterRow">
             <th v-if="lineNumbers"></th>
             <th v-for="(column, index) in columns" v-if="!column.hidden">
@@ -71,6 +74,7 @@
               </div>
             </th>
           </tr>
+
         </thead>
 
         <tbody>
@@ -89,7 +93,7 @@
             </tr>
 
           
-            <tr v-if="childrow">
+            <tr v-if="childrow && childrowToggle">
               <td class="childrow" :colspan="columns.length">
                   <slot name="childrow" :row="row" :index="index"></slot>
               </td>
@@ -179,6 +183,7 @@ import {format, parse, compareAsc} from 'date-fns/esm'
 
     data: () => ({
       currentRowIndex: null,
+      childrowToggle: false,
       currentPage: 1,
       currentPerPage: 10,
       sortColumn: -1,
