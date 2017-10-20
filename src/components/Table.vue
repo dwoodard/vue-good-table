@@ -87,9 +87,9 @@
 
           
             <tr v-if="childrow">
-              <div class="childrow">
+              <td class="childrow" colspan="0">
                   <slot name="childrow" :row="row" :index="index"></slot>
-              </div>
+              </td>
             </tr>
           
 
