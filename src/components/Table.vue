@@ -71,7 +71,8 @@
         </thead>
 
         <tbody>
-          <tr v-for="(row, index) in paginated" :class="getRowStyleClass(row)" @click="click(row, index)">
+          <template v-for="(row, index) in paginated">
+            <tr :class="getRowStyleClass(row)" @click="click(row, index)">
             <th v-if="lineNumbers" class="line-numbers">{{ getCurrentIndex(index) }}</th>
             <slot name="table-row-before" :row="row" :index="index"></slot>
             <slot name="table-row" :row="row" :formattedRow="formattedRow(row)" :index="index">
@@ -84,6 +85,7 @@
           </tr>
 
           <slot name="table-tr-after" :row="row" :index="index"></slot>
+          </template>
 
           <tr v-if="processedRows.length === 0">
             <td :colspan="columns.length">
