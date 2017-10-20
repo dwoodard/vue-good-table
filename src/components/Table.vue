@@ -72,6 +72,7 @@
 
         <tbody>
           <template v-for="(row, index) in paginated">
+            
             <tr :class="getRowStyleClass(row)" @click="click(row, index)">
             <th v-if="lineNumbers" class="line-numbers">{{ getCurrentIndex(index) }}</th>
             <slot name="table-row-before" :row="row" :index="index"></slot>
@@ -83,8 +84,14 @@
             </slot>
             <slot name="table-row-after" :row="row" :index="index"></slot>
           </tr>
+          
+          <template v-if="childrow" >
+            <div class="childrow">
+                childrow {{row}}
+            </div>
+          </template>
 
-          <slot name="table-tr-after" :row="row" :index="index"></slot>
+
           </template>
 
           <tr v-if="processedRows.length === 0">
@@ -144,6 +151,7 @@ import {format, parse, compareAsc} from 'date-fns/esm'
       sortable: {default: true},
       paginate: {default: false},
       lineNumbers: {default: false},
+      childrow: {default: false},
       defaultSortBy: {default: null},
       responsive: {default: true},
       rtl: {default: false},
