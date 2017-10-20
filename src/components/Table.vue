@@ -85,13 +85,13 @@
               <slot name="table-row-after" :row="row" :index="index"></slot>
             </tr>
 
-          <template v-if="childrow">
-            <tr>
+          
+            <tr v-if="childrow">
               <div class="childrow">
                   <slot></slot>
               </div>
             </tr>
-          </template>
+          
 
 
           </template>
