@@ -6,13 +6,14 @@
         <div class="actions pull-right">
         </div>
       </div>
+      
+      <div v-if="tableActions" class="actions" :colspan="columns.length">
+        <slot name="table-actions"></slot>
+      </div>
+
       <table ref="table" :class="styleClass">
         <thead>
           
-          <tr v-if="tableActions" class="actions" :colspan="columns.length">
-            <slot name="table-actions"></slot>
-          </tr>
-
           <tr v-if="globalSearch && externalSearchQuery == null">
             <td :colspan="lineNumbers ? columns.length + 1: columns.length">
               <div class="global-search">
