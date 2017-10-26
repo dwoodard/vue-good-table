@@ -436,6 +436,10 @@ import {format, parse, compareAsc} from 'date-fns/esm'
       getRowStyleClass(row, index) {
         let classes = '';
         this.onClick ? classes += 'clickable' : '';
+
+        console.log(this.currentRowIndex, index)
+        this.currentRowIndex == index ? classes += 'active' : '';
+
         let rowStyleClasses;
         if (typeof this.rowStyleClass === 'function') {
           rowStyleClasses = this.rowStyleClass(row);
@@ -445,10 +449,8 @@ import {format, parse, compareAsc} from 'date-fns/esm'
         if (rowStyleClasses) {
           classes += ' ' + rowStyleClasses;
         }
-        console.log(this.currentRowIndex, index)
-        if (this.currentRowIndex == index) {
-          classes += ' ' + 'active';
-        }
+
+
 
         return classes;
       }
