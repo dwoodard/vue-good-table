@@ -438,7 +438,7 @@ import {format, parse, compareAsc} from 'date-fns/esm'
         this.onClick ? classes += 'clickable' : '';
 
         console.log(this.currentRowIndex, index)
-        this.currentRowIndex == index ? classes += 'active' : '';
+        this.currentRowIndex == index ? classes += ' active ' : '';
 
         let rowStyleClasses;
         if (typeof this.rowStyleClass === 'function') {
