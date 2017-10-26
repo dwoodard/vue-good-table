@@ -445,7 +445,7 @@ import {format, parse, compareAsc} from 'date-fns/esm'
         if (rowStyleClasses) {
           classes += ' ' + rowStyleClasses;
         }
-        if (this.currentRowIndex == getCurrentIndex(index)) {
+        if (this.currentRowIndex == this.getCurrentIndex(index)) {
           classes += ' ' + 'active';
         }
         return classes;
