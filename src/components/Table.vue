@@ -83,7 +83,7 @@
 
           <template v-for="(row, index) in paginated">
 
-            <tr @click="click(row, index)" :class="active: currentRowIndex == index">
+            <tr :class="getRowStyleClass(row)" @click="click(row, index)">
               <th v-if="lineNumbers" class="line-numbers">{{ getCurrentIndex(index) }}</th>
               <slot name="table-row-before" :row="row" :index="index"></slot>
               <slot name="table-row" :row="row" :formattedRow="formattedRow(row)" :index="index">
@@ -444,6 +444,9 @@ import {format, parse, compareAsc} from 'date-fns/esm'
         }
         if (rowStyleClasses) {
           classes += ' ' + rowStyleClasses;
+        }
+        if (this.currentRowIndex) {
+          classes += ' ' + 'active';
         }
         return classes;
       }
