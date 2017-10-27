@@ -198,7 +198,6 @@ import {format, parse, compareAsc} from 'date-fns/esm'
 
     methods: {
       toggleChild(index){
-        console.log("toggleChild", index)
         if(this.currentRowIndex !== index){
           this.currentRowIndex=index;
         }else{
