@@ -203,7 +203,6 @@ import {format, parse, compareAsc} from 'date-fns/esm'
         }else{
           this.currentRowIndex = null
         }
-        
       },
 
       nextPage() {
@@ -631,7 +630,7 @@ import {format, parse, compareAsc} from 'date-fns/esm'
     },
 
     mounted() {
-      this.filteredRows = JSON.parse(JSON.stringify(this.rows));
+      this.filteredRows = this.rows ? JSON.parse(JSON.stringify(this.rows)) : [];
 
       // we need to preserve the original index of rows so lets do that
       for(const [index, row] of this.filteredRows.entries()) {
