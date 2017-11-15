@@ -6,14 +6,14 @@
         <div class="actions pull-right">
         </div>
       </div>
-      
+
       <div v-if="tableActions" class="actions" :colspan="columns.length">
         <slot name="table-actions"></slot>
       </div>
 
       <table ref="table" :class="styleClass">
         <thead>
-          
+
           <tr v-if="globalSearch && externalSearchQuery == null">
             <td :colspan="lineNumbers ? columns.length + 1: columns.length">
               <div class="global-search">
@@ -28,6 +28,7 @@
           <tr>
             <th v-if="lineNumbers" class="line-numbers"></th>
             <th v-for="(column, index) in columns"
+              :key="index"
               @click="sort(index)"
               :class="columnHeaderClass(column, index)"
               :style="{width: column.width ? column.width : 'auto'}"
@@ -41,7 +42,7 @@
 
           <tr v-if="hasFilterRow">
             <th v-if="lineNumbers"></th>
-            <th v-for="(column, index) in columns" v-if="!column.hidden">
+            <th v-for="(column, index) in columns" :key="index" v-if="!column.hidden">
               <div v-if="column.filterable" :class="columnHeaderClass(column, index)">
                 <input v-if="!column.filterDropdown"
                   type="text"
@@ -57,7 +58,8 @@
                   v-on:input="updateFilters(column, $event.target.value)">
                     <option value=""></option>
                     <option
-                      v-for="option in column.filterOptions"
+                      v-for="(option,index) in column.filterOptions"
+                      :key="index"
                       :value="option">
                       {{ option }}
                     </option>
@@ -69,7 +71,8 @@
                   :value="columnFilters[column.field]"
                   v-on:input="updateFilters(column, $event.target.value)">
                   <option value=""></option>
-                  <option v-for="option in column.filterOptions"
+                  <option v-for="(option,index) in column.filterOptions"
+                  :key="index"
                   :value="option.value">{{ option.text }}</option>
                 </select>
 
@@ -83,11 +86,11 @@
 
           <template v-for="(row, index) in paginated">
 
-            <tr :class="getRowStyleClass(row, index) " @click="click(row, index)">
+            <tr :class="getRowStyleClass(row, index) " @click="click(row, index)" :key="index">
               <th v-if="lineNumbers" class="line-numbers">{{ getCurrentIndex(index) }}</th>
               <slot name="table-row-before" :row="row" :index="index"></slot>
               <slot name="table-row" :row="row" :formattedRow="formattedRow(row)" :index="index">
-                <td v-for="(column, i) in columns" :class="getDataStyle(i, 'td')" v-if="!column.hidden">
+                <td v-for="(column, i) in columns" :key="i" :class="getDataStyle(i, 'td')" v-if="!column.hidden">
                   <span v-if="!column.html">{{ collectFormatted(row, column) }}</span>
                   <span v-if="column.html" v-html="collect(row, column.field)"></span>
                 </td>
@@ -95,7 +98,7 @@
               <slot name="table-row-after" :row="row" :index="index"></slot>
             </tr>
 
-            <tr v-if="childrow && currentRowIndex == index">
+            <tr v-if="childrow && currentRowIndex == index" :key="index">
               <td class="childrow" :colspan="columns.length">
                   <slot name="childrow" :row="row" :index="index"></slot>
               </td>
