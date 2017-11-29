@@ -593,7 +593,7 @@ import {format, parse, compareAsc} from 'date-fns/esm'
       paginated() {
         var paginatedRows = this.processedRows;
 
-        if (this.paginate) {
+        if (this.paginate && paginatedRows.length) {
           var pageStart = (this.currentPage - 1) * this.currentPerPage;
 
           // in case of filtering we might be on a page that is
