@@ -28,7 +28,7 @@
           <tr>
             <th v-if="lineNumbers" class="line-numbers"></th>
             <th v-for="(column, index) in columns"
-              
+
               @click="sort(index)"
               :class="columnHeaderClass(column, index)"
               :style="{width: column.width ? column.width : 'auto'}"
@@ -59,7 +59,7 @@
                     <option value=""></option>
                     <option
                       v-for="(option,index) in column.filterOptions"
-                      
+
                       :value="option">
                       {{ option }}
                     </option>
@@ -72,7 +72,7 @@
                   v-on:input="updateFilters(column, $event.target.value)">
                   <option value=""></option>
                   <option v-for="(option,index) in column.filterOptions"
-                  
+
                   :value="option.value">{{ option.text }}</option>
                 </select>
 
@@ -743,9 +743,9 @@ import {format, parse, compareAsc} from 'date-fns/esm'
     .table input, .table select{
       box-sizing: border-box;
       display: block;
-      width: calc(100%);
+/*      width: calc(100%);
       height: 34px;
-      padding: 6px 12px;
+*/      padding: 6px 12px;
       font-size: 14px;
       line-height: 1.42857143;
       color: #555;
